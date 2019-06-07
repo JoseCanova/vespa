@@ -155,4 +155,6 @@ StringFieldValue::AnnotationData::AnnotationData(const StringFieldValue::Annotat
 {
 }
 
+template class LiteralFieldValue<StringFieldValue, DataType::T_STRING, true>;
+
 } // document

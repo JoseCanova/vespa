@@ -9,6 +9,8 @@ using vespalib::makeLambdaTask;
 
 namespace proton {
 
+using fs_path_type = DiskMemUsageSampler::fs_path_type;
+
 DiskMemUsageSampler::DiskMemUsageSampler(const std::string &path_in, const Config &config)
     : _filter(config.hwInfo),
       _path(path_in),
@@ -48,25 +50,26 @@ namespace {
 namespace fs = std::filesystem;
 
 uint64_t
-sampleDiskUsageOnFileSystem(const fs::path &path, const HwInfo::Disk &disk)
+sampleDiskUsageOnFileSystem(const fs_path_type &path, const HwInfo::Disk &disk)
 {
+#ifdef __linux__
     auto space_info = fs::space(path);
     uint64_t result = (space_info.capacity - space_info.available);
     if (result > disk.sizeBytes()) {
         return disk.sizeBytes();
     }
-#ifdef __linux__
     return result;
 #else
-    (void) result;
+    (void) path;
     // Pretend that 50% of disk is free
     return disk.sizeBytes() / 2;
 #endif
 }
 
+#if !defined(__APPLE__) || !defined(__clang__)
 // May throw fs::filesystem_error on concurrent directory tree modification
 uint64_t
-attemptSampleDirectoryDiskUsageOnce(const fs::path &path)
+attemptSampleDirectoryDiskUsageOnce(const fs_path_type &path)
 {
     uint64_t result = 0;
     for (const auto &elem : fs::recursive_directory_iterator(path,
@@ -82,10 +85,12 @@ attemptSampleDirectoryDiskUsageOnce(const fs::path &path)
     }
     return result;
 }
+#endif
 
 uint64_t
-sampleDiskUsageInDirectory(const fs::path &path)
+sampleDiskUsageInDirectory(const fs_path_type &path)
 {
+#if !defined(__APPLE__) || !defined(__clang__)
     // Since attemptSampleDirectoryDiskUsageOnce may throw on concurrent directory
     // modifications, immediately retry a bounded number of times if this happens.
     // Number of retries chosen randomly by counting fingers.
@@ -96,6 +101,9 @@ sampleDiskUsageInDirectory(const fs::path &path)
             // Go around for another spin that hopefully won't race.
         }
     }
+#else
+    (void) path;
+#endif
     return 0;
 }
 

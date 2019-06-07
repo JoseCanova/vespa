@@ -4,6 +4,9 @@
 
 #include <vespa/searchlib/attribute/singlestringpostattribute.h>
 #include <vespa/searchlib/query/query_term_ucs4.h>
+#include <vespa/searchlib/attribute/enumstore.h>
+#include <vespa/searchlib/attribute/enumcomparator.h>
+#include <vespa/searchlib/attribute/singlestringattribute.hpp>
 
 namespace search {
 

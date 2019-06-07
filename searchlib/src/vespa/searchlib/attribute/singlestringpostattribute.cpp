@@ -5,5 +5,7 @@
 
 namespace search {
 
+template class SingleValueStringPostingAttributeT<EnumAttribute<StringAttribute> >;
+
 } // namespace search
 

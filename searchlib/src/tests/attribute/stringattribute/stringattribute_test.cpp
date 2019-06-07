@@ -11,6 +11,7 @@
 #include <vespa/searchlib/attribute/singlestringpostattribute.hpp>
 #include <vespa/searchlib/attribute/multistringattribute.h>
 #include <vespa/searchlib/attribute/multistringpostattribute.hpp>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 #include <vespa/log/log.h>
 LOG_SETUP("stringattribute_test");

@@ -10,6 +10,7 @@
 #include <atomic>
 #include <filesystem>
 #include <mutex>
+#include <vector>
 
 namespace proton {
 
@@ -21,7 +22,7 @@ namespace proton {
 class DiskMemUsageFilter : public IResourceWriteFilter,
                            public IDiskMemUsageNotifier {
 public:
-    using space_info = std::filesystem::space_info;
+    //using space_info = std::filesystem::space_info;
     using Mutex = std::mutex;
     using Guard = std::lock_guard<Mutex>;
 

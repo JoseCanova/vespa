@@ -12,6 +12,7 @@
 #include <vespa/searchlib/fef/test/ftlib.h>
 #include <vespa/searchlib/features/euclidean_distance_feature.h>
 #include <vespa/searchlib/fef/fef.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using search::feature_t;
 using namespace search::fef;

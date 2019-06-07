@@ -10,6 +10,7 @@
 #include <vespa/eval/tensor/serialization/typed_binary_format.h>
 #include <vespa/vespalib/objects/nbostream.h>
 #include <vespa/eval/tensor/dense/dense_tensor.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using namespace search;
 using namespace search::attribute;

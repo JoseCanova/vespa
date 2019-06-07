@@ -24,4 +24,5 @@ RawFieldValue::print(std::ostream& out, bool, const std::string&) const
     StringUtil::printAsHex(out, _value.data(), _value.size());
 }
 
+template class LiteralFieldValue<RawFieldValue, DataType::T_RAW, false>;
 } // document

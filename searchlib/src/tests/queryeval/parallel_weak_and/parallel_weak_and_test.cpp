@@ -13,6 +13,7 @@
 #include <vespa/searchlib/test/document_weight_attribute_helper.h>
 #include <vespa/searchlib/queryeval/document_weight_search_iterator.h>
 #include <vespa/searchlib/fef/fef.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using namespace search::query;
 using namespace search::queryeval;

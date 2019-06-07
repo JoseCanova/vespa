@@ -4,6 +4,7 @@
 
 #include "multienumattribute.h"
 #include "multivalueattribute.hpp"
+#include "enumattribute.hpp"
 #include "multienumattributesaver.h"
 #include "load_utils.h"
 #include "enum_store_loaders.h"

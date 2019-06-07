@@ -13,6 +13,7 @@
 #include <vespa/searchlib/queryeval/fake_searchable.h>
 #include <vespa/searchlib/queryeval/fake_requestcontext.h>
 #include <vespa/searchlib/test/weightedchildrenverifiers.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using namespace search;
 using namespace search::query;

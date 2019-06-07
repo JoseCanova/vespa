@@ -8,6 +8,25 @@
 #include <string>
 #include <sstream>
 
+namespace std {
+
+template<typename S, typename T>
+std::ostream&
+operator<<(std::ostream& out, const std::unordered_map<S, T>& umap)
+{
+    out << "std::unordered_map(" << umap.size() << ") {";
+    for (auto keyValue : umap) {
+        out << "\n  " << keyValue.first << ": " << keyValue.second;
+    }
+    if (!umap.empty()) {
+        out << "\n";
+    }
+    out << "}";
+    return out;
+}
+
+}
+
 namespace storage::distributor {
 
 using document::BucketId;

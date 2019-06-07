@@ -7,6 +7,7 @@
 #include <vespa/searchlib/tensor/i_tensor_attribute.h>
 #include <vespa/searchlib/tensor/tensor_attribute.h>
 #include <vespa/searchlib/test/imported_attribute_fixture.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using search::attribute::IAttributeVector;
 using search::tensor::ITensorAttribute;

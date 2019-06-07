@@ -16,6 +16,7 @@
 #include <vespa/eval/eval/tensor_spec.h>
 #include <vespa/eval/tensor/default_tensor_engine.h>
 #include <vespa/eval/tensor/tensor.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 using search::feature_t;
 using namespace search::fef;

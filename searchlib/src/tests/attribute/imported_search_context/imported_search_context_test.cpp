@@ -8,6 +8,7 @@
 #include <vespa/searchlib/test/imported_attribute_fixture.h>
 #include <vespa/vespalib/test/insertion_operators.h>
 #include <vespa/searchlib/queryeval/executeinfo.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 namespace search::attribute {
 

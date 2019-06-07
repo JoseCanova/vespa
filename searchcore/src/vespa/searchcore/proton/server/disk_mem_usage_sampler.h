@@ -14,7 +14,14 @@ namespace proton {
  */
 class DiskMemUsageSampler {
     DiskMemUsageFilter _filter;
-    std::filesystem::path _path;
+public:
+#if defined(__APPLE__) && defined(__clang__)
+    using fs_path_type = std::string;
+#else
+    using fs_path_type = std::filesystem::path;
+#endif
+private:
+    fs_path_type _path;
     vespalib::duration _sampleInterval;
     std::unique_ptr<vespalib::ScheduledExecutor> _periodicTimer;
 

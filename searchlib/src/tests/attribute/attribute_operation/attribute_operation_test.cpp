@@ -5,6 +5,7 @@
 #include <vespa/searchlib/attribute/singlenumericattribute.h>
 #include <vespa/searchlib/common/bitvector.h>
 #include <vespa/vespalib/testkit/testapp.h>
+#include <vespa/searchlib/attribute/attributevector.hpp>
 
 #include <vespa/log/log.h>
 LOG_SETUP("attribute_operation_test");

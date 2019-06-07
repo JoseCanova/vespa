@@ -31,9 +31,14 @@ sampleDiskSizeBytes(const std::string &pathStr, const HwInfoSampler::Config &cfg
     if (cfg.diskSizeBytes != 0) {
         return cfg.diskSizeBytes;
     }
+#if defined(__APPLE__) && defined(__clang__)
+    (void) pathStr;
+    return UINT64_C(1000000000000); // 1000 GB
+#else
     std::filesystem::path path(pathStr);
     auto space_info = std::filesystem::space(path);
     return space_info.capacity;
+#endif
 }
 
 uint64_t

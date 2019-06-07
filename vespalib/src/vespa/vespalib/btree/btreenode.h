@@ -146,6 +146,8 @@ public:
     static const AggrT &getEmptyAggregated() { return _instance; }
 };
 
+template <typename AggrT>
+AggrT BTreeNodeAggregatedWrap<AggrT>::_instance;
 
 template <>
 class BTreeNodeAggregatedWrap<NoAggregated>
