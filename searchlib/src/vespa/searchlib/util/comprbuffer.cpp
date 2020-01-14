@@ -67,14 +67,21 @@ ComprBuffer::allocComprBuf()
          * buffers.
          */
         paddingBefore = paddingAfter + 2 * _unitSize;
+#ifdef __linux__
         size_t memalign = FastOS_File::getMaxDirectIOMemAlign();
         if (paddingBefore < memalign)
             paddingBefore = memalign;
+#endif
     }
     size_t fullpadding = paddingAfter + paddingBefore;
     size_t allocLen = _comprBufSize * _unitSize + fullpadding;
+#ifdef __linux__
     void *alignedBuf = FastOS_File::allocateGenericDirectIOBuffer(allocLen,
             _comprBufMalloc);
+#else
+    void *alignedBuf = malloc(allocLen);
+    _comprBufMalloc =alignedBuf;
+#endif
     memset(alignedBuf, 0, allocLen);
     /*
      * Set pointer to the start of normal buffer, which should be properly

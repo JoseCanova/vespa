@@ -55,7 +55,13 @@ sampleDiskUsageOnFileSystem(const fs::path &path, const HwInfo::Disk &disk)
     if (result > disk.sizeBytes()) {
         return disk.sizeBytes();
     }
+#ifdef __linux__
     return result;
+#else
+    (void) result;
+    // Pretend that 50% of disk is free
+    return disk.sizeBytes() / 2;
+#endif
 }
 
 // May throw fs::filesystem_error on concurrent directory tree modification

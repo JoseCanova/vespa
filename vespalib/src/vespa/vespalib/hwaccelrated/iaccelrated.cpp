@@ -5,7 +5,9 @@
 #include "sse2.h"
 #include "avx.h"
 #include "avx2.h"
+#ifdef __linux__
 #include "avx512.h"
+#endif
 
 #include <vespa/log/log.h>
 LOG_SETUP(".vespalib.hwaccelrated");
@@ -40,10 +42,12 @@ public:
     IAccelrated::UP create() const override { return IAccelrated::UP(new Avx2Accelrator()); }
 };
 
+#ifdef __linux__
 class Avx512Factory :public Factory{
 public:
     IAccelrated::UP create() const override { return IAccelrated::UP(new Avx512Accelrator()); }
 };
+#endif
 
 template<typename T>
 void verifyAccelrator(const IAccelrated & accel)
@@ -102,9 +106,12 @@ Selector::Selector() :
     _factory(new GenericFactory())
 {
     __builtin_cpu_init ();
+#ifdef __linux__
     if (__builtin_cpu_supports("avx512f")) {
         _factory.reset(new Avx512Factory());
-    } else if (__builtin_cpu_supports("avx2")) {
+    } else
+#endif
+    if (__builtin_cpu_supports("avx2")) {
         _factory.reset(new Avx2Factory());
     } else if (__builtin_cpu_supports("avx")) {
         _factory.reset(new AvxFactory());

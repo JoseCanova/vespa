@@ -1,5 +1,6 @@
 // Copyright 2017 Yahoo Holdings. Licensed under the terms of the Apache 2.0 license. See LICENSE in the project root.
 
+#ifdef __linux__
 #include "avx512.h"
 #include "avxprivate.hpp"
 
@@ -18,3 +19,5 @@ Avx512Accelrator::dotProduct(const double * af, const double * bf, size_t sz) co
 }
 
 }
+
+#endif

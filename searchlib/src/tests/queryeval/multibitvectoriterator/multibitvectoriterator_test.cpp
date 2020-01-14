@@ -133,9 +133,15 @@ Test::testAndWith(bool invert)
         H firstHits3 = seekNoReset(*s, 1, 130);
         H lastHits3 = seekNoReset(*s, 130, _bvs[0]->size());
         //These constants will change if srand(7) is changed.
+#ifdef __linux__
         EXPECT_EQUAL(30u, firstHits2.size());
         EXPECT_EQUAL(19u, firstHits3.size());
         EXPECT_EQUAL(1234u, lastHits2F.size());
+#else
+        EXPECT_TRUE(firstHits2.size() == 36u || firstHits2.size() == 37u);
+        EXPECT_TRUE(firstHits3.size() == 18u || firstHits3.size() == 19u);
+        EXPECT_EQUAL(1171u, lastHits2F.size());
+#endif
         ASSERT_EQUAL(lastHits3.size(), lastHits2F.size());
         for (size_t i(0); i < lastHits3.size(); i++) {
             EXPECT_EQUAL(lastHits3[i], lastHits2F[i]);
